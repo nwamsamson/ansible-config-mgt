@@ -29,6 +29,15 @@
 
 # Vhost configuration.
 - import_tasks: vhosts.yml
+- name: set webservers host name in /etc/hosts
+  become: yes
+  blockfile:
+    path: /etc/hosts
+    block: |
+      {{ item.ip }} {{ item.name }}
+  loop:
+    - { name: web1, ip: 172.31.43.143}
+    - { name: web2, ip: 172.31.44.59}
 
 # Nginx setup.
 - name: Copy nginx configuration in place.

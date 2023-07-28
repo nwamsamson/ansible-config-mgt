@@ -1,0 +1,22 @@
+[nfs]
+172.31.42.244 ansible_ssh_user='ec2-user' ansible_ssh_private_key_file=~/.ssh/id_rsa
+
+[webservers]
+172.31.43.143 ansible_ssh_user='ec2-user' ansible_ssh_private_key_file=~/.ssh/id_rsa
+172.31.44.59 ansible_ssh_user='ec2-user' ansible_ssh_private_key_file=~/.ssh/id_rsa
+
+[db]
+172.31.47.128 ansible_ssh_user='ubuntu' ansible_ssh_private_key_file=~/.ssh/id_rsa
+
+[lb]
+172.31.37.40 ansible_ssh_user='ubuntu' ansible_ssh_private_key_file=~/.ssh/id_rsa
+
+
+[deployments:children]
+nfs
+webservers
+
+[deployments:vars]
+ansible_user=ubuntu
+ansible_ssh_private_key_file=~/.ssh/id_rsa
+ansible_python_interpreter=/usr/bin/python3

@@ -31,7 +31,7 @@
 - import_tasks: vhosts.yml
 - name: set webservers host name in /etc/hosts
   become: yes
-  blockfile:
+  blockinfile:
     path: /etc/hosts
     block: |
       {{ item.ip }} {{ item.name }}

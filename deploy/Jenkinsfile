@@ -1,50 +1,52 @@
-  pipeline {
-    agent any
+pipeline{
+  agent any
 
-  stages {
-    stage('Initial cleanup'){
-      steps{
-        dir("${WORKSPACE}") {
-          deleteDir()
-        }
-      }
-    }
-    stage('Build') {
-      steps {
-        script {
-          sh 'echo "Building Stage"'
-        }
-      }
-    }
-
-    stage('Test') {
-      steps {
-        script {
-          sh 'echo "Testing Stage"'
-        }
-      }
-    }
-
-    stage('Package'){
-      steps {
-        script {
-          sh 'echo "Packaging App"'
-        }
-      }
-    }
-
-    stage('Deploy'){
-      steps {
-        script {
-          sh 'echo "Deploy to Dev"'
-        }
-      }
-    }
-
-    stage('Clean Up'){
-      steps {
-        cleanWs()
-      }
-    }
+  environment {
+    ANSIBLE_CONFIG= "${WORKSPACE}/deploy/ansible.cfg"
   }
+
+stages {
+
+    stage('Initial Clean Up') {
+      steps {
+        dir('${WORKSPACE}') {
+         deleteDir()
+        }
+
+      }
+    }
+
+
+    stage('Checkout SCM') {
+      steps {
+        git branch: 'feature/jenkinspipeline-stages', url: 'https://github.com/nwamsamson/ansible-config-mgt.git'
+      }
+    }
+
+    stage('Setting Roles Path in the Ansible.cfg File') {
+
+      steps {
+        sh 'echo ${WORKSPACE}'
+        sh 'sed -i "3 a roles_path=${WORKSPACE}/roles" ${WORKSPACE}/deploy/ansible.cfg'
+      }
+    }
+
+    stage('Run Ansible Playbook') {
+
+      steps {
+        ansiblePlaybook become: true, colorized: true, credentialsId: 'private-key', disableHostKeyChecking: true, installation: 'ansible', inventory: 'inventory/dev', playbook: 'playbooks/site.yml'
+
+      }
+    }
+
+    stage('Clean Workspace after build') {
+      steps {
+         cleanWs(cleanWhenAborted: true, cleanWhenNotBuilt: true, cleanWhenUnstable: true, cleanWhenFailure: true)
+      }
+
+    }
+     
+   }
+}
+
 }

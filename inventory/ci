@@ -1,0 +1,2 @@
+[artifact_repository]
+172.31.95.253 ansible_ssh_user='ec2-user'

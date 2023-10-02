@@ -53,7 +53,7 @@
         url: http://3.80.209.134:8082/artifactory/project-14/php-todo
         dest: /home/ec2-user/
         url_username: admin
-        url_password: Artifactory1 
+        url_password: Artifactory1
 
 
     - name: unzip the artifacts

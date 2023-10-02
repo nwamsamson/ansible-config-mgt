@@ -12,7 +12,7 @@
         gpgkey: https://rpms.remirepo.net/RPM-GPG-KEY-remi
         enabled: yes
         gpgcheck: yes
-    when: ansible_distribution_major_version == '9'
+    when: ansible_distribution_major_version == '9.2'
 
 
     

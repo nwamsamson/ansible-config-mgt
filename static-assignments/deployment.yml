@@ -4,15 +4,25 @@
   hosts: todo
 
   tasks:
-    - name: Install Remi repository for CentOS/RHEL 9
-      ansible.builtin.yum_repository:
-        name: remi
-        description: Remi's RPM repository for Enterprise Linux 9 - $basearch
-        baseurl: https://rpms.remirepo.net/enterprise/9/remi/$basearch/
-        gpgkey: https://rpms.remirepo.net/RPM-GPG-KEY-remi
-        enabled: yes
-        gpgcheck: yes
-    when: ansible_distribution_major_version == '9.2'
+    # - name: Install Remi repository for CentOS/RHEL 9
+    #   ansible.builtin.yum_repository:
+    #     name: remi
+    #     description: Remi's RPM repository for Enterprise Linux 9 - $basearch
+    #     baseurl: https://rpms.remirepo.net/enterprise/9/remi/$basearch/
+    #     gpgkey: https://rpms.remirepo.net/RPM-GPG-KEY-remi
+    #     enabled: yes
+    #     gpgcheck: yes
+    # when: ansible_distribution_major_version == '9.2'
+
+    - name: Import remi GPG key.
+      rpm_key:
+        key: "https://rpms.remirepo.net/RPM-GPG-KEY-remi2023"
+        state: present
+
+    - name: Install remi repo.
+      yum:
+        name: "https://rpms.remirepo.net/enterprise/remi-release-9.rpm"
+        state: present
 
 
     

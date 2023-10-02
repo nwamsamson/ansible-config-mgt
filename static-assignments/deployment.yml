@@ -4,16 +4,13 @@
   hosts: todo
 
   tasks:
-    - name: Import remi GPG key.
-      rpm_key:
-        key: "https://rpms.remirepo.net/RPM-GPG-KEY-remi2023"
-        state: present
-
-    - name: Install remi repo.
-      yum:
-        name: "https://rpms.remirepo.net/enterprise/remi-release-9.rpm"
-        state: present
-
+    - name: install remi and rhel repo
+      ansible.builtin.yum:
+        name: 
+          - https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
+          - dnf-utils
+          - http://rpms.remirepo.net/enterprise/remi-release-9.rpm
+        disable_gpg_check: yes
 
     
     - name: install httpd on the webserver
@@ -53,10 +50,10 @@
 
     - name: Download the artifact
       get_url:
-        url: http://3.80.209.134:8082/artifactory/project-14/php-todo
+        url: http://3.125.156.235:8082/artifactory/PBL/php-todo
         dest: /home/ec2-user/
         url_username: admin
-        url_password: Artifactory1
+        url_password: APBKm4qXoDaoE4pTfHAD6iPnJMh  
 
 
     - name: unzip the artifacts

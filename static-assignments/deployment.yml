@@ -44,7 +44,7 @@
         url: http://54.84.145.120:8082/artifactory/project-14/php-todo
         dest: /home/ec2-user/
         url_username: admin
-        url_password: cmVmdGtuOjAxOjE3Mjc4NTUzMTU6MWE1Y29scGdGRWh3T2lSSFh6dFdPRjdhbXZp
+        url_password: Artifactory1
 
 
     - name: unzip the artifacts

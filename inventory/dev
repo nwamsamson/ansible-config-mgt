@@ -4,5 +4,8 @@
 [db]
 172.31.34.50 ansible_ssh_user='ubuntu' 
 
+[sonarqube]
+172.31.55.120 ansible_ssh_user='ubuntu'
+
 [todo]
 172.31.86.181 ansible_ssh_user='ec2-user'

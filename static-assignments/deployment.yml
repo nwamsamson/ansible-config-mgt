@@ -53,12 +53,12 @@
        dest: /home/ec2-user/
        remote_src: yes
 
-   - name: Create /var/www/html directory if it doesn't exist
+    - name: Create /var/www/html directory if it doesn't exist
       ansible.builtin.file:
-        path: /home/ec2-user/var/www/html
-        state: directory
-        mode: '0755'
-        recurse: yes
+       path: /home/ec2-user/var/www/html
+       state: directory
+       mode: '0755'
+       recurse: yes
 
     - name: deploy the code
       ansible.builtin.copy:

@@ -1,7 +1,7 @@
 ---
 # tasks file for sonarqube
 - name: install java 11
-  ansible.builtin.yum:
+  ansible.builtin.apt:
     name: java-11-openjdk-devel
     state: present
 

@@ -34,9 +34,9 @@
     path: /opt/sonarqube-7.9.3.zip
     state: absent
 
-- name: add user to run sonar
-  ansible.builtin.shell: useradd -c "user to run SonarQube" -d /opt/sonarqube -g sonar sonar
-  when: not sonarqube_directory.stat.exists
+#- name: add user to run sonar
+ # ansible.builtin.shell: useradd -c "user to run SonarQube" -d /opt/sonarqube -g sonar sonar
+
 
 - name: change ownership
   ansible.builtin.shell: chown sonar:sonar /opt/sonarqube -R

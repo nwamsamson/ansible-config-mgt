@@ -58,22 +58,10 @@
     - name: deploy the code
       ansible.builtin.copy:
         src: /home/ec2-user/var/lib/jenkins/workspace/php-todo_main/
-        dest: /var/www/laravel_app/
+        dest: /var/www/html/
         force: yes
         remote_src: yes
 
-    - name: ensure /var/www/html/ is absent
-      ansible.builtin.file:
-        path: /var/www/html/
-        state: present
-
-
-    # Create a symbolic link from /var/www/html to the public directory of the Laravel application
-    - name: create symbolic link to laravel public directory
-      ansible.builtin.file:
-        src: /var/www/laravel_app/public/
-        dest: /var/www/html/
-        state: link
 
     - name: remove nginx default page
       ansible.builtin.file:

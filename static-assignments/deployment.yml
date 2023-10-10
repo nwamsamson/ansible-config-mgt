@@ -65,7 +65,7 @@
     - name: ensure /var/www/html/ is absent
       ansible.builtin.file:
         path: /var/www/html/
-        state: absent
+        state: present
 
 
     # Create a symbolic link from /var/www/html to the public directory of the Laravel application

@@ -62,6 +62,12 @@
         force: yes
         remote_src: yes
 
+    - name: ensure /var/www/html/ is absent
+      ansible.builtin.file:
+        path: /var/www/html/
+        state: absent
+
+
     # Create a symbolic link from /var/www/html to the public directory of the Laravel application
     - name: create symbolic link to laravel public directory
       ansible.builtin.file:
